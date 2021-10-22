@@ -1,3 +1,4 @@
+import com.android.build.gradle.internal.dsl.ManagedVirtualDevice
 import extensions.addComposeConfig
 import extensions.addComposeDependencies
 
@@ -49,9 +50,45 @@ android {
     addComposeConfig()
 
     testOptions {
-        unitTests.isReturnDefaultValues = true
+        devices {
+            add(
+                ManagedVirtualDevice("pixel4api30").apply {
+                    device = "Pixel 4"
+                    apiLevel = 30
+                    systemImageSource = "aosp-atd"
+                    abi = "x86"
+                }
+            )
+            add(
+                ManagedVirtualDevice("pixel2api26").apply {
+                    device = "Pixel 2"
+                    apiLevel = 26
+                    systemImageSource = "aosp"
+                    abi = "x86"
+                }
+            )
+            add(
+                ManagedVirtualDevice("nexus9api29").apply {
+                    device = "Nexus 9"
+                    apiLevel = 29
+                    systemImageSource = "aosp"
+                    abi = "x86"
+                }
+            )
+        }
+        deviceGroups {
+            create("alkaaDevices").apply {
+                targetDevices.addAll(
+                    listOf(
+                        devices.getByName("pixel4api30"),
+                        // TODO add again after tests: devices.getByName("pixel2api26"),
+                        // TODO add again after tests: devices.getByName("nexus9api29")
+                    )
+                )
+            }
+            unitTests.isReturnDefaultValues = true
+        }
     }
-}
 
 dependencies {
     implementation(projects.libraries.core)
@@ -77,5 +114,9 @@ dependencies {
     implementation(Deps.android.playCore)
     implementation(Deps.koin.android)
 
-    addComposeDependencies()
+        androidTestImplementation(projects.libraries.test)
+        androidTestImplementation(Deps.koin.test)
+
+        addComposeDependencies()
+    }
 }
