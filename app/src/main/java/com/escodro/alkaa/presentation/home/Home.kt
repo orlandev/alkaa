@@ -11,16 +11,17 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomAppBar
 import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.material.ModalBottomSheetState
 import androidx.compose.material.ModalBottomSheetValue
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
 import androidx.compose.material.rememberModalBottomSheetState
+import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -29,11 +30,11 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.escodro.alkaa.model.HomeSection
@@ -73,8 +74,8 @@ fun Home(onTaskClick: (Long) -> Unit, onAboutClick: () -> Unit, onTrackerClick: 
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
+@OptIn(ExperimentalMaterialApi::class, ExperimentalMaterial3Api::class)
 private fun AlkaaHomeScaffold(
     homeSection: HomeSection,
     modifier: Modifier,
@@ -202,15 +203,13 @@ private fun AlkaaContent(
 
 @Composable
 private fun AlkaaTopBar(currentSection: HomeSection) {
-    TopAppBar(backgroundColor = MaterialTheme.colors.background, elevation = 0.dp) {
-        Box(modifier = Modifier.fillMaxSize()) {
+    CenterAlignedTopAppBar(
+        title = {
             Text(
-                modifier = Modifier.align(Alignment.Center),
-                style = MaterialTheme.typography.h5,
-                text = stringResource(currentSection.title)
+                style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Thin),
+                text = stringResource(currentSection.title),
             )
-        }
-    }
+        })
 }
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -220,14 +219,14 @@ private fun AlkaaBottomNav(
     onSectionSelect: (HomeSection) -> Unit,
     items: List<HomeSection>
 ) {
-    BottomAppBar(backgroundColor = MaterialTheme.colors.background) {
+    BottomAppBar(backgroundColor = MaterialTheme.colorScheme.background) {
         items.forEach { section ->
             val selected = section == currentSection
             val colorState = animateColorAsState(
                 if (selected) {
-                    MaterialTheme.colors.primary
+                    MaterialTheme.colorScheme.primary
                 } else {
-                    MaterialTheme.colors.onSecondary
+                    MaterialTheme.colorScheme.outline
                 }
             )
             AlkaaBottomIcon(
