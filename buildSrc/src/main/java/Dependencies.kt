@@ -37,7 +37,7 @@ object Versions {
     const val composeNav = "2.4.0"
     const val composeVm = "2.4.0"
     const val composeActivity = "1.3.0"
-    const val composeMaterialYou = "1.0.0-alpha01"
+    const val composeMaterialYou = "1.0.0-alpha02"
 
     const val accompanist = "0.22.1-rc"
 
