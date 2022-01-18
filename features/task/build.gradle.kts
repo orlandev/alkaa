@@ -21,5 +21,4 @@ dependencies {
 
     testImplementation(Deps.test.coreKtx)
     androidTestImplementation(Deps.compose.activity)
-    androidTestImplementation(Deps.test.barista)
 }

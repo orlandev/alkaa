@@ -31,6 +31,7 @@ dependencies {
         exclude(group = "androidx.lifecycle", module = "lifecycle-runtime")
     }
 
-    implementation(Deps.test.core)
+    api(Deps.test.core)
     implementation(Deps.test.uiAutomator)
+    api(Deps.test.barista)
 }
