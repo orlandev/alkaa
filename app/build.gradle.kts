@@ -55,8 +55,7 @@ android {
                 ManagedVirtualDevice("pixel4api30").apply {
                     device = "Pixel 4"
                     apiLevel = 30
-                    systemImageSource = "aosp-atd"
-                    abi = "x86"
+                    systemImageSource = "aosp"
                 }
             )
             add(
@@ -80,8 +79,8 @@ android {
             create("alkaaDevices").apply {
                 targetDevices.addAll(
                     listOf(
-                        devices.getByName("pixel4api30"),
-                        // TODO add again after tests: devices.getByName("pixel2api26"),
+                        // devices.getByName("pixel4api30"),
+                        devices.getByName("pixel2api26"),
                         // TODO add again after tests: devices.getByName("nexus9api29")
                     )
                 )
