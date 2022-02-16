@@ -209,7 +209,8 @@ private fun AlkaaTopBar(currentSection: HomeSection) {
                 style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Thin),
                 text = stringResource(currentSection.title),
             )
-        })
+        }
+    )
 }
 
 @OptIn(ExperimentalMaterialApi::class)
